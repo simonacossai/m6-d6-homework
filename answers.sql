@@ -12,3 +12,35 @@ SELECT contact_name AS name, contact_title AS title FROM public.customers WHERE 
 DELETE FROM public.customers WHERE city='Lyon';
 UPDATE public.customers SET region='Unknown' WHERE region isNull;
 
+
+/*ARTICLE SCHEMA*/
+DROP TABLE IF EXISTS articles;
+CREATE TABLE articles (
+    article_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    headLine VARCHAR(100) NOT NULL,
+    subHead  VARCHAR(150) NOT NULL,
+    content text NOT NULL,
+    category json NOT NULL, 
+    author: VARCHAR(50) NOT NULL,
+    cover: text NOT NULL,
+    reviews: text[] NOT NULL,
+    created_at SET DEFAULT now();
+);
+
+/*AUTHOR SCHEMA*/
+DROP TABLE IF EXISTS authors;
+CREATE TABLE authors (
+    author_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    name: VARCHAR(50) NOT NULL,
+    img: text NOT NULL,
+);
+
+/*REVIEW SCHEMA*/
+DROP TABLE IF EXISTS reviews;
+CREATE TABLE reviews (
+    review_id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    user: VARCHAR(50) NOT NULL,
+    review: text NOT NULL,
+    created_at SET DEFAULT now();
+);
+
